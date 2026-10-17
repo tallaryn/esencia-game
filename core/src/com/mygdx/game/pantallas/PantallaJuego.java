@@ -74,6 +74,20 @@ public class PantallaJuego implements Screen {
           dibujaEncabezado();
           batch.end();
 	
+          if(juego.nivelCompletado())
+          {
+        	  Screen ss = new PantallaJuego(game,
+        			  						juego.aumentaRonda(), 
+        			  						juego.getScore(), 
+        			  						2, 
+        			  						2, 
+        			  						juego.aumentarAsteroides(2)
+        			  						);
+  			ss.resize(1200, 800);
+  			game.setScreen(ss);
+  			dispose();
+          }
+          
           int puntosFinales = juego.haTerminado();
           if (puntosFinales != 0) {
         	  	Screen ss = new PantallaGameOver(game);

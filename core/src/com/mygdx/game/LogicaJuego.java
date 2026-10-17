@@ -58,14 +58,23 @@ public class LogicaJuego {
 	
 	public void actualizar()
 	{
-		// actualizacion balas y asteroides
+		// actualizacion colisiones, balas y asteroides
 		
 		actualizarBalas();
 		
 		actualizarAsteroides();
 
 		huboColision();
+		
 	      
+	}
+	
+	
+	public boolean nivelCompletado()
+	{
+		if(balls1.size() == 0)
+			return true;
+		return false;
 	}
 	
 	public void actualizarBalas()
@@ -117,6 +126,16 @@ public class LogicaJuego {
 	    //Dibujar goku
 	    goku.draw(batch, this);
 	    
+	}
+	
+	public int aumentaRonda()
+	{
+		return ronda ++;
+	}
+	
+	public int aumentarAsteroides(int cant)
+	{
+		return cantAsteroides += cant;
 	}
 	
 	public boolean huboColision() 
