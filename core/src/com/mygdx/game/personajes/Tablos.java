@@ -1,14 +1,15 @@
 package com.mygdx.game.personajes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.pantallas.PantallaJuego;
+import com.mygdx.game.LogicaJuego;
+import com.mygdx.game.ataques.Kizazo;
+import com.mygdx.movimiento.*;
 
 public class Tablos extends Personaje{
     
@@ -19,8 +20,11 @@ public class Tablos extends Personaje{
     private boolean herido = false; 
     private Rectangle hitbox;
     
+    private MovimientoStrategy move = new MovimientoIA(900);
+
+    
     public Tablos(int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
-    	super(2000, 1);
+    	super(100, 1);
     	sonidoHerido = soundChoque;
     	this.soundBala = soundBala;
     	this.txBala = txBala;
@@ -32,23 +36,16 @@ public class Tablos extends Personaje{
     	
     }
     
-    public void draw(SpriteBatch batch, PantallaJuego juego){
+    public void draw(SpriteBatch batch, LogicaJuego logicaJuego){
         float x =  spr.getX();
         float y =  spr.getY();
-        
-        float velocidad = 300f * Gdx.graphics.getDeltaTime();
-        
+
         if (!herido) {
             
-	        // que se mantenga dentro de los bordes de la ventana
-            if (x < 0) x = 0;
-            if (x + spr.getWidth() > Gdx.graphics.getWidth()) x = Gdx.graphics.getWidth() - spr.getWidth();
-            if (y < 0) y = 0;
-            if (y + spr.getHeight() > Gdx.graphics.getHeight()) y = Gdx.graphics.getHeight() - spr.getHeight();
+	        // mover
+            move.mover(spr, hitbox, 900, 800);
             
-	        spr.setPosition(x, y); 
-	        hitbox.setPosition(x + 15, y + 20);
-         
+	                 
  		    spr.draw(batch);
         } else {
            spr.setX(spr.getX()+MathUtils.random(-2,2));
@@ -56,9 +53,8 @@ public class Tablos extends Personaje{
  		  spr.setX(x);
  		 }
         // disparo
-        
-        
-    }
+	        
+        }
     
     @Override
     public void herir(int dano)
@@ -71,6 +67,23 @@ public class Tablos extends Personaje{
     {
     	aumentarFase();
     }
+    
+    public boolean checkCollision(Kizazo b, int dano) {
+    	if(!herido && b.getArea().overlaps(hitbox)){
+        	
+            //actualizar vidas y herir
+            herir(dano);
+            
+            return true;
+        }
+        return false;
+    }
+
+    public boolean perdio()
+    {
+    	return estadoPartida();
+	}
+    
 }
       
 

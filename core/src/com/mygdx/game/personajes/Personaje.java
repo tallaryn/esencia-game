@@ -26,6 +26,7 @@ public abstract class Personaje {
 	{
 		vida -= dano;
 	}
+	
 	public boolean estadoPartida()
 	{
 		if(vida <= 0)

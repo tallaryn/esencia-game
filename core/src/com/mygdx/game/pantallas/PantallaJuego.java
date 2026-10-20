@@ -1,6 +1,4 @@
 package com.mygdx.game.pantallas;
-import java.util.ArrayList;
-import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,12 +6,9 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.EsenciaGame;
 import com.mygdx.game.LogicaJuego;
-import com.mygdx.game.ataques.Ball;
-import com.mygdx.game.ataques.Kizazo;
 
 
 public class PantallaJuego implements Screen {
@@ -25,13 +20,10 @@ public class PantallaJuego implements Screen {
 	private Music gameMusic;
 	private LogicaJuego juego;
 
-	public PantallaJuego(EsenciaGame game, int ronda, int score,  
-						 int velXAsteroides, int velYAsteroides, 
-						 int cantAsteroides) 
+	public PantallaJuego(EsenciaGame game, int score) 
 	{
 		this.game = game;		
-		juego = new LogicaJuego(ronda, score,  cantAsteroides,
-				 				velXAsteroides, velYAsteroides);
+		juego = new LogicaJuego(score);
 		
 		batch = game.getBatch();
 		camera = new OrthographicCamera();	
@@ -40,27 +32,36 @@ public class PantallaJuego implements Screen {
 		
 		//inicializar assets; musica de fondo y efectos de sonido
 		explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.ogg"));
-		explosionSound.setVolume(1,1f);
-		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("Bring-Me-To-Life.ogg")); //
+		explosionSound.setVolume(1,0.02f);
 		
 		
+		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("Bring-Me-To-Life.ogg"));
 		gameMusic.setLooping(true);
-		gameMusic.setVolume(0.3f);
+		gameMusic.setVolume(0.5f);
 		gameMusic.play();
 	}
 		
     
 	public void dibujaEncabezado() 
 	{
-		CharSequence str = "Vidas: " + juego.getGoku().getVida()+
-						   " Ronda: "+juego.getRonda();
+		game.getFont().getData().setScale(1.5f); 
+
+	   
+	    float xDerecha = 1200 - 300; 
+	    
+	    
+	    float yInicial = 800 - 40;
+	    
+	   
+	    float espaciado = 35; 
+
+	    
+	    game.getFont().draw(batch, "Vidas Goku: " + juego.getGoku().getVida(), xDerecha, yInicial);
+	    game.getFont().draw(batch, "Vidas Tablos: " + juego.getTablos().getVida(), xDerecha, yInicial - espaciado);
+	    game.getFont().draw(batch, "Score: " + juego.getScore(), xDerecha, yInicial - (espaciado * 3));
+	    game.getFont().draw(batch, "HighScore: " + game.getHighScore(), xDerecha, yInicial - (espaciado * 4));
+	    game.getFont().draw(batch, "Ki acumulado: " + juego.getGoku().getKi(), xDerecha, yInicial - (espaciado * 2));
 		
-		game.getFont().getData().setScale(2f);		
-		game.getFont().draw(batch, str, 10, 30);
-		
-		game.getFont().draw(batch, "Score:"+juego.getScore(), Gdx.graphics.getWidth()-150, 30);
-		game.getFont().draw(batch, "HighScore:"+game.getHighScore(), 
-							Gdx.graphics.getWidth()/2-100, 30);
 	}
 	
 	@Override
@@ -74,19 +75,6 @@ public class PantallaJuego implements Screen {
           dibujaEncabezado();
           batch.end();
 	
-          if(juego.nivelCompletado())
-          {
-        	  Screen ss = new PantallaJuego(game,
-        			  						juego.aumentaRonda(), 
-        			  						juego.getScore(), 
-        			  						2, 
-        			  						2, 
-        			  						juego.aumentarAsteroides(2)
-        			  						);
-  			ss.resize(1200, 800);
-  			game.setScreen(ss);
-  			dispose();
-          }
           
           int puntosFinales = juego.haTerminado();
           if (puntosFinales != 0) {
