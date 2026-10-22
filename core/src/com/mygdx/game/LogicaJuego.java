@@ -109,6 +109,7 @@ public class LogicaJuego {
 	public int haTerminado()
 	{
 		if(goku.perdiste()) {
+			HiScoreSingleton.getInstance().manejarRecord(this.score);
 			return score;
 		}
 		return 0;

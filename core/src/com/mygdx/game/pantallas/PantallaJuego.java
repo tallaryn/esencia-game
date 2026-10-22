@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.EsenciaGame;
 import com.mygdx.game.LogicaJuego;
+import com.mygdx.game.HiScoreSingleton;
 
 
 public class PantallaJuego implements Screen {
@@ -59,7 +60,7 @@ public class PantallaJuego implements Screen {
 	    game.getFont().draw(batch, "Vidas Goku: " + juego.getGoku().getVida(), xDerecha, yInicial);
 	    game.getFont().draw(batch, "Vidas Tablos: " + juego.getTablos().getVida(), xDerecha, yInicial - espaciado);
 	    game.getFont().draw(batch, "Score: " + juego.getScore(), xDerecha, yInicial - (espaciado * 3));
-	    game.getFont().draw(batch, "HighScore: " + game.getHighScore(), xDerecha, yInicial - (espaciado * 4));
+	    game.getFont().draw(batch, "HighScore: " + HiScoreSingleton.getInstance().getHiScore(), xDerecha, yInicial - (espaciado * 4));
 	    game.getFont().draw(batch, "Ki acumulado: " + juego.getGoku().getKi(), xDerecha, yInicial - (espaciado * 2));
 		
 	}
@@ -78,8 +79,7 @@ public class PantallaJuego implements Screen {
           
           int puntosFinales = juego.haTerminado();
           if (puntosFinales != 0) {
-        	  	Screen ss = new PantallaGameOver(game);
-        	  	game.actualizaHighScore(puntosFinales);
+        	  	Screen ss = new PantallaGameOver(game, puntosFinales);
 				ss.resize(1200, 800);
 				game.setScreen(ss);
 				dispose();

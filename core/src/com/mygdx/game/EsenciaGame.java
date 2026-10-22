@@ -12,10 +12,8 @@ public class EsenciaGame extends Game {
 	private String nombreJuego = "Esencia Game";
 	private SpriteBatch batch;
 	private BitmapFont font;
-	private int highScore;	
 
 	public void create() {
-		highScore = 0;
 		batch = new SpriteBatch();
 		font = new BitmapFont(); // usa Arial font x defecto
 		font.getData().setScale(2f);
@@ -31,14 +29,7 @@ public class EsenciaGame extends Game {
 		batch.dispose();
 		font.dispose();
 	}
-	
-	public void actualizaHighScore(int nuevo)
-	{
-		if(nuevo > highScore)
-		{
-			highScore = nuevo;
-		}
-	}
+
 
 	public SpriteBatch getBatch() {
 		return batch;
@@ -47,15 +38,5 @@ public class EsenciaGame extends Game {
 	public BitmapFont getFont() {
 		return font;
 	}
-
-	public int getHighScore() {
-		return highScore;
-	}
-
-	public void setHighScore(int highScore) {
-		this.highScore = highScore;
-	}
-	
-	
 
 }

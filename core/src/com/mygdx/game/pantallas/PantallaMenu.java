@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.EsenciaGame;
+import com.mygdx.game.HiScoreSingleton;
 
 
 public class PantallaMenu implements Screen {
@@ -28,6 +29,10 @@ public class PantallaMenu implements Screen {
 
 		game.getBatch().begin();
 		game.getFont().draw(game.getBatch(), "esencia game", 500, 500);
+
+		int recordPuntaje = HiScoreSingleton.getInstance().getHiScore();
+		game.getFont().draw(game.getBatch(), "Record: " + recordPuntaje, 350, 400);
+		
 		game.getFont().draw(game.getBatch(), "Presiona cualquier tecla para empezar ...", 350, 300);
 	
 		game.getBatch().end();
