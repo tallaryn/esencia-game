@@ -33,7 +33,7 @@ public class Goku extends Personaje{
     private final float COOLDOWN = 0.25f; 
     
     private int kiAcumulado = 0;
-    private int maxKi = 10;
+    private int maxKi = 1000;
     
     private MovimientoStrategy move = new MovimientoTeclado();
     
@@ -98,23 +98,26 @@ public class Goku extends Personaje{
     
     public void aumentarKi()
     {
-    	if(kiAcumulado == maxKi)
-    	{
-    		transformarse();
-    		kiAcumulado = 0;
-    		return;
-    	}
+    	transformarse();
     	kiAcumulado ++;
-    	
+    }
+   
+    @Override
+    protected boolean puedeTransformarse() {
+    	return kiAcumulado == maxKi;
     }
     
     @Override 
-    public void transformarse()
+    protected void aplicarTransformacion()
     {
-    	sumaPoder(30);
-    	aumentarFase();
+		//cambiar png de goku super sayan
+		sumaPoder(30);
     }
-      
+    
+    @Override
+    protected void finalTransformacion() {
+    	kiAcumulado = 0;
+    }
     
     public boolean checkCollision(Kizazo b) {
     	if(!herido && b.getArea().overlaps(hitbox)){            

@@ -24,7 +24,7 @@ public class Tablos extends Personaje{
 
     
     public Tablos(int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
-    	super(100, 1);
+    	super(10000, 1);
     	sonidoHerido = soundChoque;
     	this.soundBala = soundBala;
     	this.txBala = txBala;
@@ -63,9 +63,16 @@ public class Tablos extends Personaje{
     }
     
     @Override
-    public void transformarse()
+    protected boolean puedeTransformarse()
     {
-    	aumentarFase();
+    	return vida < 5000;
+    }
+    
+    @Override
+    protected void aplicarTransformacion() {
+        if (fase == 2) {
+            poder *= 2;
+        }
     }
     
     public boolean checkCollision(Kizazo b, int dano) {

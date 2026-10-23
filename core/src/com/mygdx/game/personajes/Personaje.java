@@ -2,9 +2,9 @@ package com.mygdx.game.personajes;
 
 public abstract class Personaje {
 
-	private int vida;
-	private int poder;
-	private int fase = 1;
+	protected int vida;
+	protected int poder;
+	protected int fase = 1;
 	
 	//constructor
 	
@@ -17,9 +17,19 @@ public abstract class Personaje {
 
 	//metodos
 
-	public abstract void herir(int v);
+	public final void transformarse(){ //TemplateMethod
+		
+		if(puedeTransformarse()) {
+			fase++;
+			aplicarTransformacion();
+			finalTransformacion();
+		}
+		
+	}
 	
-	public abstract void transformarse();
+	
+	public abstract void herir(int v);
+
 	
 	
 	public void quitarVida(int dano)
@@ -36,16 +46,14 @@ public abstract class Personaje {
 		return false;
 	}
 	
-	public void aumentarFase()
-	{
-		fase++;
-	}
-	
 	public void sumaPoder(int cantPoder)
 	{
 		poder += cantPoder;
 	}
 	
+	protected abstract boolean puedeTransformarse(); //Cada personaje define su criterio de transformacion.
+	protected abstract void aplicarTransformacion(); //Cada personaje define como se transforma.
+	protected void finalTransformacion() {} //Cada personaje define como finaliza su transformacion. Opcional
 
 	//getters y setters
 
