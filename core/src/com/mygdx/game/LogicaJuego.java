@@ -152,6 +152,7 @@ public class LogicaJuego {
 		this.goku = goku;
 	}
 	
-
-		
+	public void setTablos(Tablos tablos) {
+		this.tablos = tablos;
 	}
+}
