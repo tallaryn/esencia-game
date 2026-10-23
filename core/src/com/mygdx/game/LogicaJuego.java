@@ -119,9 +119,10 @@ public class LogicaJuego {
 	{
 		if(tablos.perdio())
 		{
+			HiScoreSingleton.getInstance().manejarRecord(this.score);
 			return score;
 		}
-		return score;
+		return 0;
 	}
 	
 	public boolean agregarBala(Kizazo bb) {
