@@ -5,7 +5,7 @@ public abstract class Personaje {
 	protected int vida;
 	protected int poder;
 	protected int fase = 1;
-	private int maxFase = 2;
+	protected int maxFase = 2;
 	
 	//constructor
 	

@@ -52,7 +52,7 @@ public class Goku extends Personaje{
     	spr.setPosition(x, y);
     	spr.setOriginCenter();
     	spr.setSize(90, 150);
-    	hitbox = new Rectangle(x, y, 25, 45);
+    	hitbox = new Rectangle(x, y, 15, 15);
     	
     }
     
@@ -65,8 +65,12 @@ public class Goku extends Personaje{
         
         if (!herido) {
         	
-	        // que se mueva con teclado
-        	move.mover(spr, hitbox, 900, 800);
+        	//aumentar ki de goku -> no puede moverse mientras lo hace
+        	if(!aumentarKi()) {
+        		
+        		// que se mueva con teclado
+        		move.mover(spr, hitbox, 900, 800);
+        	}
 
  		    spr.draw(batch);
         } else {
@@ -90,18 +94,19 @@ public class Goku extends Personaje{
             tiempoUltimoDisparo = 0; // Reiniciamos cooldown
         }
         
-        //aumentar ki (energia) de goku
         
-        if(Gdx.input.isKeyPressed(Input.Keys.X))
-        {
-        	aumentarKi();
-        }
     }
     
-    public void aumentarKi()
+    public boolean aumentarKi()
     {
-    	transformarse();
-    	kiAcumulado ++;
+    	if(fase == maxFase) return false;
+    	if(Gdx.input.isKeyPressed(Input.Keys.X))
+    	{
+	    	transformarse();
+	    	kiAcumulado ++;
+	    	return true;
+    	}
+    	return false;
     }
    
     @Override
@@ -113,7 +118,7 @@ public class Goku extends Personaje{
     protected void aplicarTransformacion()
     {
 		//cambiar png de goku super saiyan
-		sumaPoder(30);
+		sumaPoder(80);
     }
     
     @Override

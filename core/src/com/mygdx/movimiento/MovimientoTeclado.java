@@ -36,8 +36,12 @@ public class MovimientoTeclado implements MovimientoStrategy{
             y = 800 - spr.getHeight();
         }
         
+        float centroX = spr.getX() + (spr.getWidth() / 2f);
+        float centroY = spr.getY() + (spr.getHeight() / 2f);
+
+        
         spr.setPosition(x, y); 
-        hitbox.setPosition(x + 15, y + 20);
+        hitbox.setPosition(centroX - (hitbox.width / 2f), centroY - (hitbox.height / 2f));
 
 		
 	}

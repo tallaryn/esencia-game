@@ -35,9 +35,9 @@ public class Tablos extends Personaje{
     private float cooldownAtaque = 2.0f;
 
     
-    public Tablos(int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
-    	super(5000, 1);
-    	vidaMaxima = vida;
+    public Tablos(int x, int y, int vidaMax, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
+    	super(vidaMax, 1);
+    	vidaMaxima = vidaMax;
     	sonidoHerido = soundChoque;
     	this.soundBala = soundBala;
     	this.txKi= txBala;
@@ -46,7 +46,7 @@ public class Tablos extends Personaje{
     	spr.setOriginCenter();
     	spr.setSize(90, 150);
     	hitbox = new Rectangle(x, y, 45, 75);
-    	ataque = new PatronAbanico(txKi, 5, -4f); 
+    	ataque = new PatronAbanico(txKi, 5, -4f, 3); 
     	
     }
     
@@ -99,7 +99,7 @@ public class Tablos extends Personaje{
         if (fase != 2) {
             // ataques fase 1
             switch (tipoAtaque) {
-                case 0: ataque = new PatronAbanico(txKi, 5, -4f); break;
+                case 0: ataque = new PatronAbanico(txKi, 5, -4f, 3); break;
                 /*
                 case 1: ataque = new PatronAnillo(txKi, 12, -3f); break;
                 case 2: ataque = new PatronEspiral(txKi, 20, -4f); break;
@@ -109,8 +109,7 @@ public class Tablos extends Personaje{
             // ataques fase 2
             switch (tipoAtaque) {
                 case 0: 
-                	for(int i = 0 ; i < 4 ; i++)
-                	ataque = new PatronAbanico(txKi, 15, -7f); 
+                	ataque = new PatronAbanico(txKi, 8, -5.5f, 3); 
                 	break; // Más denso y rápido
                 	
                 
