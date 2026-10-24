@@ -24,6 +24,7 @@ public class Goku extends Personaje{
     private Sound soundBala;
     private Texture txBala;
     private Rectangle hitbox;
+    private Texture auraKi;
     
     private boolean herido = false;
     private int tiempoHeridoMax=50;
@@ -40,12 +41,13 @@ public class Goku extends Personaje{
     
     
     
-    public Goku(int x, int y, Sound her, Sound bala, Texture txbala, Texture txgoku) 
+    public Goku(int x, int y, Sound her, Sound bala, Texture txbala, Texture txgoku, Texture txAura) 
     {
     	super(3, 20);
     	sonidoHerido = her;
     	this.soundBala = bala;
     	this.txBala = txbala; 
+    	auraKi = txAura;
     	spr = new Sprite(txgoku);
     	spr.setPosition(x, y);
     	spr.setOriginCenter();
@@ -78,8 +80,8 @@ public class Goku extends Personaje{
         
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && tiempoUltimoDisparo >= COOLDOWN) {         
             Kizazo bala = new Kizazo(
-                spr.getX() + spr.getWidth() / 2 - 5,
-                spr.getY() + spr.getHeight() - 5,
+                (float) spr.getX() + spr.getWidth() / 2 - 5,
+                (float) spr.getY() + spr.getHeight() - 5,
                 0, 3, txBala
             );
             juego.agregarBala(bala);
@@ -110,7 +112,7 @@ public class Goku extends Personaje{
     @Override 
     protected void aplicarTransformacion()
     {
-		//cambiar png de goku super sayan
+		//cambiar png de goku super saiyan
 		sumaPoder(30);
     }
     

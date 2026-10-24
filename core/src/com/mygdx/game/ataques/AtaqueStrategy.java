@@ -1,7 +1,7 @@
 package com.mygdx.game.ataques;
 
-import com.mygdx.game.personajes.Personaje;
+import com.badlogic.gdx.utils.Array;
 
 public interface AtaqueStrategy {
-	void ejecutarAtaque(Personaje p);
+	Array<Kizazo> ejecutarAtaque(float x, float y);
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ataques.Kizazo;
 import com.mygdx.game.personajes.Goku;
 import com.mygdx.game.personajes.Tablos;
@@ -14,6 +15,7 @@ public class LogicaJuego {
 	private Goku goku;
 	private Tablos tablos;
 	private  ArrayList<Kizazo> balas = new ArrayList<>();
+	private Array<Kizazo> proyectilesEnemigos = new Array<>();
 
 	
 	public LogicaJuego(int score) {
@@ -27,7 +29,8 @@ public class LogicaJuego {
 	    		Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")),
 	    		Gdx.audio.newSound(Gdx.files.internal("pop-sound.mp3")),
 	    		new Texture(Gdx.files.internal("Rocket2.png")),
-	    		new Texture(Gdx.files.internal("goku.png"))
+	    		new Texture(Gdx.files.internal("goku.png")),
+	    		new Texture(Gdx.files.internal("auraKi.png"))
 	    		); 
 	    
 	    //cargar assets de tablos
@@ -45,6 +48,8 @@ public class LogicaJuego {
 		// actualizacion colisiones, balas y asteroides
 		
 		actualizarBalas();
+		
+		actualizarProyectilesEnemigos();
 
 		colisionGoku();
 		
@@ -67,6 +72,18 @@ public class LogicaJuego {
       }
 	}
 	
+	private void actualizarProyectilesEnemigos() {
+	    for (int i = 0; i < proyectilesEnemigos.size; i++) {
+	        Kizazo b = proyectilesEnemigos.get(i);
+	        b.update();
+
+	        if (b.isDestroyed()) {
+	            proyectilesEnemigos.removeIndex(i);
+	            i--;
+	        }
+	    }
+	}
+	
 	
 	public void dibujar(SpriteBatch batch)
 	{
@@ -74,7 +91,11 @@ public class LogicaJuego {
 	    for (Kizazo b : balas) {
 	        b.draw(batch);
 	    }
-
+	    
+	    for(Kizazo p : proyectilesEnemigos)
+	    {
+	    	p.draw(batch);
+	    }
 	    
 	    //Dibujar goku 
 	    goku.draw(batch, this);
@@ -87,6 +108,19 @@ public class LogicaJuego {
 	
 	public boolean colisionGoku() 
 	{
+		for(int i = 0; i < proyectilesEnemigos.size ; i++)
+		{
+			
+			Kizazo k = proyectilesEnemigos.get(i);
+			
+			if(goku.checkCollision(k))
+			{
+				proyectilesEnemigos.removeIndex(i);
+				score += 30;
+				return true;
+			}
+		}
+
 		return false;
 	}
 	
@@ -127,6 +161,10 @@ public class LogicaJuego {
 	
 	public boolean agregarBala(Kizazo bb) {
     	return balas.add(bb);
+    }
+	
+	public void agregarProyectilesEnemigos(Array<Kizazo> bb) {
+    	proyectilesEnemigos.addAll(bb);
     }
 	
 	

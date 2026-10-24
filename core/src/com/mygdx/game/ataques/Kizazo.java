@@ -9,12 +9,12 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Kizazo {
 
-	private int xSpeed;
-	private int ySpeed;
+	private float xSpeed;
+	private float ySpeed;
 	private boolean destroyed = false;
 	private Sprite spr;
 	    
-	    public Kizazo(float x, float y, int xSpeed, int ySpeed, Texture tx) {
+	    public Kizazo(float x, float y, float xSpeed, float ySpeed, Texture tx) {
 	    	spr = new Sprite(tx);
 	    	spr.setPosition(x, y);
 	        this.xSpeed = xSpeed;

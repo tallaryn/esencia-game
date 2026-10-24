@@ -5,6 +5,7 @@ public abstract class Personaje {
 	protected int vida;
 	protected int poder;
 	protected int fase = 1;
+	private int maxFase = 2;
 	
 	//constructor
 	
@@ -19,7 +20,7 @@ public abstract class Personaje {
 
 	public final void transformarse(){ //TemplateMethod
 		
-		if(puedeTransformarse()) {
+		if(puedeTransformarse() && fase < maxFase) {
 			fase++;
 			aplicarTransformacion();
 			finalTransformacion();
