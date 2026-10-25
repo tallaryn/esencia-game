@@ -122,7 +122,7 @@ public class Tablos extends Personaje{
     @Override
     protected boolean puedeTransformarse()
     {
-    	return (vida < vidaMaxima * 0.5);
+    	return (vida < vidaMaxima * 0.67);
     }
     
     @Override

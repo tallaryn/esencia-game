@@ -21,17 +21,17 @@ public class Patron implements AtaqueStrategy {
         this.apertura = apertura;
     }
     
-    public Patron(Texture tx, float velocidad) {
-        this.txKi = tx;
+    public Patron(Texture txBala, float velocidad2) {
+    	this.txKi = txBala;
         this.cantidad = 1;
-        this.velocidad = velocidad;
+        this.velocidad = velocidad2;
         this.filas = 1;
         this.anguloCentro = 90f;
         this.apertura = 0f;
-    }
 
+	}
 
-    @Override
+	@Override
     public Array<Kizazo> ejecutarAtaque(float x, float y) {
         AtaqueBuilder builder = new AtaqueBuilder();
         		
