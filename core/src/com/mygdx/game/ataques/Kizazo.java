@@ -13,15 +13,32 @@ public class Kizazo {
 	private float ySpeed;
 	private boolean destroyed = false;
 	private Sprite spr;
+	private float delay = 0f;
+	    
+	    public Kizazo(float x, float y, float xSpeed, float ySpeed, Texture tx, float delay) {
+	    	spr = new Sprite(tx);
+	    	spr.setPosition(x, y);
+	        this.xSpeed = xSpeed;
+	        this.ySpeed = ySpeed;
+	        this.delay = delay;
+	        
+	    }
 	    
 	    public Kizazo(float x, float y, float xSpeed, float ySpeed, Texture tx) {
 	    	spr = new Sprite(tx);
 	    	spr.setPosition(x, y);
 	        this.xSpeed = xSpeed;
 	        this.ySpeed = ySpeed;
+	        
 	    }
 	    
 	    public void update() {
+	    	if(delay > 0)
+	    	{
+	    		delay -= Gdx.graphics.getDeltaTime();
+	    		return;
+	    	}
+	    	
 	        spr.setPosition(spr.getX()+xSpeed, spr.getY()+ySpeed);
 	        if (spr.getX() < 0 || spr.getX()+spr.getWidth() > 900) {
 	            destroyed = true;

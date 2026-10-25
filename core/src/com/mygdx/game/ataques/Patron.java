@@ -20,19 +20,16 @@ public abstract class Patron implements AtaqueStrategy {
     @Override
     public Array<Kizazo> ejecutarAtaque(float x, float y) {
         AtaqueBuilder builder = new AtaqueBuilder();
-        float espacioEntreFilas = 60f;
         		
         for (int i = 0; i < filas ; i++)
-        {
-        	float desfaseY = i * espacioEntreFilas;
-        	
-        	
+        {     	
+        	float delay = i * 0.4f;
 	        for (int j = 0; j < cantidad; j++) {
 	        	
 	            float velX = calcularVelocidadX(j);
 	            float velY = calcularVelocidadY(j); 
 	            
-	            builder.agregarKizazo(x, y - desfaseY, velX, velY, txKi);
+	            builder.agregarKizazo(x, y, velX, velY, txKi, delay);
 	        }
         }
 

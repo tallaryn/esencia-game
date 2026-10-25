@@ -11,11 +11,11 @@ public class PatronAbanico extends Patron {
     private float generarAngulo(int i) {
         float anguloCentro = 90.0f;
         float apertura = 90.0f;
-
+        
         if (cantidad <= 1) {
             return anguloCentro;
         }
-
+        
         float proporcion = (float) i / (cantidad - 1);
 
         return anguloCentro - apertura / 2.0f

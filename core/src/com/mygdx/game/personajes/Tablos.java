@@ -8,9 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.LogicaJuego;
-import com.mygdx.game.ataques.Kizazo;
-import com.mygdx.game.ataques.Patron;
-import com.mygdx.game.ataques.PatronAbanico;
+import com.mygdx.game.ataques.*;
 import com.mygdx.movimiento.MovimientoIA;
 import com.mygdx.movimiento.MovimientoStrategy;
 
@@ -94,14 +92,15 @@ public class Tablos extends Personaje{
     }
     
     private void rotarAtaque() {
-//        tipoAtaque = (tipoAtaque + 1) % 3;
-    	tipoAtaque = 0;
+    	
+        tipoAtaque = (tipoAtaque + 1) % 3;
         if (fase != 2) {
             // ataques fase 1
             switch (tipoAtaque) {
                 case 0: ataque = new PatronAbanico(txKi, 5, -4f, 3); break;
+                
+                case 1: ataque = new PatronAnillo(txKi, 10, -5f, 2); break;
                 /*
-                case 1: ataque = new PatronAnillo(txKi, 12, -3f); break;
                 case 2: ataque = new PatronEspiral(txKi, 20, -4f); break;
                 */
             }
@@ -113,8 +112,9 @@ public class Tablos extends Personaje{
                 	break; // Más denso y rápido
                 	
                 
+                
+                case 1: ataque = new PatronAnillo(txKi, 15, -5f, 4); break;  // Círculo perfecto cerrado
                 /*
-                case 1: ataque = new PatronAnillo(txKi, 36, -5f); break;  // Círculo perfecto cerrado
                 case 2: ataque = new PatronEspiral(txKi, 60, -8f); break; // Lluvia masiva
                 */
             }

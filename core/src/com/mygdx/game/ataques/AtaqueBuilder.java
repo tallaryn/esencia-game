@@ -8,15 +8,9 @@ public class AtaqueBuilder {
     private Array<Kizazo> proyectiles = new Array<>();
 
     public AtaqueBuilder agregarKizazo(
-            float x, float y, float velX, float velY, Texture tx) {
+            float x, float y, float velX, float velY, Texture tx, float delay) {
 
-        proyectiles.add(new Kizazo(x, y, velX, velY, tx));
-        return this;
-    }
-    
-    public AtaqueBuilder agregarKizazo( Kizazo at ) {
-
-        proyectiles.add(at);
+        proyectiles.add(new Kizazo(x, y, velX, velY, tx, delay));
         return this;
     }
 
