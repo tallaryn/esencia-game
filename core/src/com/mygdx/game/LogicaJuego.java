@@ -14,7 +14,7 @@ public class LogicaJuego {
 	private int score;
 	private Goku goku;
 	private Tablos tablos;
-	private  ArrayList<Kizazo> balas = new ArrayList<>();
+	private  Array<Kizazo> balas = new Array<>();
 	private Array<Kizazo> proyectilesEnemigos = new Array<>();
 
 	
@@ -48,9 +48,9 @@ public class LogicaJuego {
 	{
 		// actualizacion colisiones, balas y asteroides
 		
-		actualizarBalas();
+		actualizarAtaque(balas);
 		
-		actualizarProyectilesEnemigos();
+		actualizarAtaque(proyectilesEnemigos);
 
 		colisionGoku();
 		
@@ -60,29 +60,17 @@ public class LogicaJuego {
 	
 	
 	
-	public void actualizarBalas()
+	public void actualizarAtaque(Array<Kizazo> ataque)
 	{
-		for (int i = 0; i < balas.size(); i++) {
-            Kizazo b = balas.get(i);
+		for (int i = 0; i < ataque.size; i++) {
+            Kizazo b = ataque.get(i);
             b.update();
             
             if (b.isDestroyed()) {
-                balas.remove(b);
+                ataque.removeIndex(i);
                 i--; //para no saltarse 1 tras eliminar del arraylist
             }
       }
-	}
-	
-	private void actualizarProyectilesEnemigos() {
-	    for (int i = 0; i < proyectilesEnemigos.size; i++) {
-	        Kizazo b = proyectilesEnemigos.get(i);
-	        b.update();
-
-	        if (b.isDestroyed()) {
-	            proyectilesEnemigos.removeIndex(i);
-	            i--;
-	        }
-	    }
 	}
 	
 	
@@ -117,7 +105,6 @@ public class LogicaJuego {
 			if(goku.checkCollision(k))
 			{
 				proyectilesEnemigos.removeIndex(i);
-				score += 30;
 				return true;
 			}
 		}
@@ -127,13 +114,13 @@ public class LogicaJuego {
 	
 	public boolean colisionTablos()
 	{
-		for(int i = 0; i < balas.size(); i++)
+		for(int i = 0; i < balas.size; i++)
 		{
 			Kizazo k = balas.get(i);
 			
 			if(tablos.checkCollision(k, goku.getPoder()))
 			{
-				balas.remove(i);
+				balas.removeIndex(i);
 				score += 30;
 				return true;
 			}
@@ -160,8 +147,8 @@ public class LogicaJuego {
 		return 0;
 	}
 	
-	public boolean agregarBala(Kizazo bb) {
-    	return balas.add(bb);
+	public void agregarBala(Array<Kizazo> bb) {
+    	balas.addAll(bb);
     }
 	
 	public void agregarProyectilesEnemigos(Array<Kizazo> bb) {

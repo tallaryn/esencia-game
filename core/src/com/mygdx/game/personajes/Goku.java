@@ -2,6 +2,7 @@ package com.mygdx.game.personajes;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.ataques.Kizazo;
+import com.mygdx.game.ataques.Patron;
 import com.mygdx.game.LogicaJuego;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -16,9 +17,6 @@ import com.mygdx.movimiento.*;
 
 public class Goku extends Personaje{
 	
-    private float xVel = 0;
-    private float yVel = 0;
-    
     private Sprite spr;
     private Sound sonidoHerido;
     private Sound soundBala;
@@ -35,6 +33,7 @@ public class Goku extends Personaje{
     
     private int kiAcumulado = 0;
     private int maxKi = 500;
+    private Patron ataque;
     
     private MovimientoStrategy move = new MovimientoTeclado();
     
@@ -55,6 +54,7 @@ public class Goku extends Personaje{
     	
     	auraKi = new Sprite(txAura);
     	auraKi.setSize(100, 180);
+    	ataque = new Patron(txBala, 3f);
     	
     }
     
@@ -76,12 +76,11 @@ public class Goku extends Personaje{
         		 // disparo
                 
                 if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && tiempoUltimoDisparo >= COOLDOWN) {         
-                    Kizazo bala = new Kizazo(
-                        (float) spr.getX() + spr.getWidth() / 2 - 5,
-                        (float) spr.getY() + spr.getHeight() - 5,
-                        0, 3, txBala
-                    );
-                    juego.agregarBala(bala);
+                    
+                	juego.agregarBala(ataque.ejecutarAtaque(spr.getX() + spr.getWidth() / 2 - 5,
+                						  spr.getY() + spr.getHeight() - 5
+                						  )
+                					 );
                     soundBala.play();
                     
                     tiempoUltimoDisparo = 0; // Reiniciamos cooldown

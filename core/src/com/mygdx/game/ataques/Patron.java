@@ -20,6 +20,16 @@ public class Patron implements AtaqueStrategy {
         this.anguloCentro = anguloCentro;
         this.apertura = apertura;
     }
+    
+    public Patron(Texture tx, float velocidad) {
+        this.txKi = tx;
+        this.cantidad = 1;
+        this.velocidad = velocidad;
+        this.filas = 1;
+        this.anguloCentro = 90f;
+        this.apertura = 0f;
+    }
+
 
     @Override
     public Array<Kizazo> ejecutarAtaque(float x, float y) {
