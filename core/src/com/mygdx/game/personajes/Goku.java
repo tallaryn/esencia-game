@@ -108,7 +108,7 @@ public class Goku extends Personaje{
     	{
     		auraKi.setPosition(spr.getX()-5 , spr.getY());
     		auraKi.draw(batch);
-	    	transformarse();
+    		TRANSFORMARSE();
 	    	
 	    	kiAcumulado ++;
 	    	return true;
