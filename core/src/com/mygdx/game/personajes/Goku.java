@@ -24,7 +24,7 @@ public class Goku extends Personaje{
     private Sound soundBala;
     private Texture txBala;
     private Rectangle hitbox;
-    private Texture auraKi;
+    private Sprite auraKi;
     
     private boolean herido = false;
     private int tiempoHeridoMax=50;
@@ -47,12 +47,14 @@ public class Goku extends Personaje{
     	sonidoHerido = her;
     	this.soundBala = bala;
     	this.txBala = txbala; 
-    	auraKi = txAura;
     	spr = new Sprite(txgoku);
     	spr.setPosition(x, y);
     	spr.setOriginCenter();
     	spr.setSize(90, 150);
     	hitbox = new Rectangle(x, y, 15, 15);
+    	
+    	auraKi = new Sprite(txAura);
+    	auraKi.setSize(100, 180);
     	
     }
     
@@ -66,7 +68,7 @@ public class Goku extends Personaje{
         if (!herido) {
         	
         	//aumentar ki de goku -> no puede moverse mientras lo hace
-        	if(!aumentarKi()) {
+        	if(!aumentarKi(batch)) {
         		
         		// que se mueva con teclado
         		move.mover(spr, hitbox, 900, 800);
@@ -99,12 +101,15 @@ public class Goku extends Personaje{
         
     }
     
-    public boolean aumentarKi()
+    public boolean aumentarKi(SpriteBatch batch)
     {
     	if(fase == maxFase) return false;
     	if(Gdx.input.isKeyPressed(Input.Keys.X))
     	{
+    		auraKi.setPosition(spr.getX()-5 , spr.getY());
+    		auraKi.draw(batch);
 	    	transformarse();
+	    	
 	    	kiAcumulado ++;
 	    	return true;
     	}
@@ -120,6 +125,11 @@ public class Goku extends Personaje{
     protected void aplicarTransformacion()
     {
 		//cambiar png de goku super saiyan
+    	float posX = spr.getX();
+    	float posY = spr.getY();
+    	spr = new Sprite(new Texture (Gdx.files.internal("goku-ssj.png")));
+    	spr.setSize(90, 150);
+    	spr.setPosition(posX, posY);
 		sumaPoder(80);
     }
     
