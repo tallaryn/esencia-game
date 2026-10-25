@@ -79,18 +79,16 @@ public class PantallaJuego implements Screen {
           batch.end();
 	
           
-          int puntosFinales = juego.haTerminado();
-          if (puntosFinales != 0) {
-        	  	Screen ss = new PantallaGameOver(game, puntosFinales);
+          if (juego.haTerminado()) {
+        	  	Screen ss = new PantallaGameOver(game, juego.getScore());
 				ss.resize(1200, 800);
 				game.setScreen(ss);
 				dispose();
           }
           
-          puntosFinales = juego.ganaste();
-          if(puntosFinales != 0)
+          if(juego.ganaste())
           {
-        	  Screen ss = new PantallaFinalBueno(game, puntosFinales);
+        	  Screen ss = new PantallaFinalBueno(game, juego.getScore());
 				ss.resize(1200, 800);
 				game.setScreen(ss);
 				dispose();

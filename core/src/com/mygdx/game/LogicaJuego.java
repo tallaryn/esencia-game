@@ -128,23 +128,23 @@ public class LogicaJuego {
 		return false;
 	}
 	
-	public int haTerminado()
+	public boolean haTerminado()
 	{
 		if(goku.perdiste()) {
 			HiScoreSingleton.getInstance().manejarRecord(this.score);
-			return score;
+			return true;
 		}
-		return 0;
+		return false;
 	}
 	
-	public int ganaste()
+	public boolean ganaste()
 	{
 		if(tablos.perdio())
 		{
 			HiScoreSingleton.getInstance().manejarRecord(this.score);
-			return score;
+			return true;
 		}
-		return 0;
+		return false;
 	}
 	
 	public void agregarBala(Array<Kizazo> bb) {

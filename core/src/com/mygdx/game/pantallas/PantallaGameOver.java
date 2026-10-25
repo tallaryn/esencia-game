@@ -45,7 +45,7 @@ public class PantallaGameOver implements Screen {
 		if (esNuevoRecord) {
 			game.getFont().draw(game.getBatch(), "NUEVO RECORD !!! ", 100, 250);
 		}
-		game.getFont().draw(game.getBatch(), "Presiona cualquier tecla para reiniciar ...", 100, 300);
+		game.getFont().draw(game.getBatch(), "Presiona cualquier tecla para reiniciar ...", 100, 200);
 	
 		game.getBatch().end();
 

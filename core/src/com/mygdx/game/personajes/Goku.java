@@ -25,7 +25,7 @@ public class Goku extends Personaje{
     private Sprite auraKi;
     
     private boolean herido = false;
-    private int tiempoHeridoMax=50;
+    private int tiempoHeridoMax=70;
     private int tiempoHerido;
     
     private float tiempoUltimoDisparo = 0;
