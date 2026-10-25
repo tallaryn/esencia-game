@@ -44,7 +44,7 @@ public class Tablos extends Personaje{
     	spr.setOriginCenter();
     	spr.setSize(90, 150);
     	hitbox = new Rectangle(x, y, 45, 75);
-    	ataque = new PatronAbanico(txKi, 5, -4f, 3); 
+    	ataque = new Patron(txKi, 5, -4f, 3, 90f, 90f); 
     	
     }
     
@@ -97,26 +97,18 @@ public class Tablos extends Personaje{
         if (fase != 2) {
             // ataques fase 1
             switch (tipoAtaque) {
-                case 0: ataque = new PatronAbanico(txKi, 5, -4f, 3); break;
+                case 0: ataque = new Patron(txKi, 5, -4f, 3, 90, 90); break; //abanico
                 
-                case 1: ataque = new PatronAnillo(txKi, 10, -3.5f, 2); break;
-                /*
-                case 2: ataque = new PatronEspiral(txKi, 20, -4f); break;
-                */
+                case 1: ataque = new Patron(txKi, 10, -3.5f, 2, 90, 360); break; // anillo
             }
         } else {
             // ataques fase 2
             switch (tipoAtaque) {
                 case 0: 
-                	ataque = new PatronAbanico(txKi, 8, -5.5f, 3); 
-                	break; 
+                	ataque = new Patron(txKi, 8, -5.5f, 3, 90, 90); break; //abanico
                 	
-                
-                
-                case 1: ataque = new PatronAnillo(txKi, 15, -5f, 4); break;
-                /*
-                case 2: ataque = new PatronEspiral(txKi, 60, -8f); break;
-                */
+                case 1: ataque = new Patron(txKi, 15, -5f, 4, 90, 360); break; // anillo
+               
             }
         }
     }

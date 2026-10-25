@@ -3,18 +3,22 @@ package com.mygdx.game.ataques;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
-public abstract class Patron implements AtaqueStrategy {
+public class Patron implements AtaqueStrategy {
 
-    protected Texture txKi;
-    protected int cantidad;
-    protected float velocidad;
-    protected int filas;
+    private Texture txKi;
+    private int cantidad;
+    private float velocidad;
+    private int filas;
+    private float anguloCentro; //direccion de disparo: 90 abajo
+    private float apertura; //separacion entre balas
 
-    public Patron(Texture tx, int cantidad, float velocidad, int filas) {
+    public Patron(Texture tx, int cantidad, float velocidad, int filas, float anguloCentro, float apertura) {
         this.txKi = tx;
         this.cantidad = cantidad;
         this.velocidad = velocidad;
         this.filas = filas;
+        this.anguloCentro = anguloCentro;
+        this.apertura = apertura;
     }
 
     @Override
@@ -35,9 +39,30 @@ public abstract class Patron implements AtaqueStrategy {
 
         return builder.construir();
     }
+    
+    private float generarAngulo(int i) {
+        
+        if (cantidad <= 1) {
+            return anguloCentro;
+        }
+        
+        float proporcion = (float) i / (cantidad - 1);
 
-    public abstract float calcularVelocidadX(int indiceBala);
-    public abstract float calcularVelocidadY(int indiceBala);
+        return anguloCentro - apertura / 2.0f
+                + proporcion * apertura;
+    }
 
+
+    public float calcularVelocidadX(int i) {
+        return velocidad * (float) Math.cos(
+                Math.toRadians(generarAngulo(i))
+        );
+    }
+
+    public float calcularVelocidadY(int i) {
+        return velocidad * (float) Math.sin(
+                Math.toRadians(generarAngulo(i))
+        );
+    }
 
 }
