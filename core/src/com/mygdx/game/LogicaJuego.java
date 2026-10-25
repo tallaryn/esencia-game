@@ -35,7 +35,7 @@ public class LogicaJuego {
 	    
 	    //cargar assets de tablos
 	    tablos = new Tablos(Gdx.graphics.getWidth()/2-50,700,
-	    					5000,
+	    					7000,
 	    					new Texture(Gdx.files.internal("tablos.png")),
 	    					Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")),
 	    					new Texture(Gdx.files.internal("Rocket2.png")),

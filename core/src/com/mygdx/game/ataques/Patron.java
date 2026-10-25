@@ -23,7 +23,7 @@ public abstract class Patron implements AtaqueStrategy {
         		
         for (int i = 0; i < filas ; i++)
         {     	
-        	float delay = i * 0.4f;
+        	float delay = i * 0.36f;
 	        for (int j = 0; j < cantidad; j++) {
 	        	
 	            float velX = calcularVelocidadX(j);

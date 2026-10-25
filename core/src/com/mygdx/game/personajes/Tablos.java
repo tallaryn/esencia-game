@@ -99,7 +99,7 @@ public class Tablos extends Personaje{
             switch (tipoAtaque) {
                 case 0: ataque = new PatronAbanico(txKi, 5, -4f, 3); break;
                 
-                case 1: ataque = new PatronAnillo(txKi, 10, -5f, 2); break;
+                case 1: ataque = new PatronAnillo(txKi, 10, -3.5f, 2); break;
                 /*
                 case 2: ataque = new PatronEspiral(txKi, 20, -4f); break;
                 */
@@ -109,13 +109,13 @@ public class Tablos extends Personaje{
             switch (tipoAtaque) {
                 case 0: 
                 	ataque = new PatronAbanico(txKi, 8, -5.5f, 3); 
-                	break; // Más denso y rápido
+                	break; 
                 	
                 
                 
-                case 1: ataque = new PatronAnillo(txKi, 15, -5f, 4); break;  // Círculo perfecto cerrado
+                case 1: ataque = new PatronAnillo(txKi, 15, -5f, 4); break;
                 /*
-                case 2: ataque = new PatronEspiral(txKi, 60, -8f); break; // Lluvia masiva
+                case 2: ataque = new PatronEspiral(txKi, 60, -8f); break;
                 */
             }
         }

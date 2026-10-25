@@ -34,7 +34,7 @@ public class Goku extends Personaje{
     private final float COOLDOWN = 0.25f; 
     
     private int kiAcumulado = 0;
-    private int maxKi = 1000;
+    private int maxKi = 500;
     
     private MovimientoStrategy move = new MovimientoTeclado();
     
@@ -70,6 +70,20 @@ public class Goku extends Personaje{
         		
         		// que se mueva con teclado
         		move.mover(spr, hitbox, 900, 800);
+        		
+        		 // disparo
+                
+                if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && tiempoUltimoDisparo >= COOLDOWN) {         
+                    Kizazo bala = new Kizazo(
+                        (float) spr.getX() + spr.getWidth() / 2 - 5,
+                        (float) spr.getY() + spr.getHeight() - 5,
+                        0, 3, txBala
+                    );
+                    juego.agregarBala(bala);
+                    soundBala.play();
+                    
+                    tiempoUltimoDisparo = 0; // Reiniciamos cooldown
+                }
         	}
 
  		    spr.draw(batch);
@@ -80,19 +94,7 @@ public class Goku extends Personaje{
  		   tiempoHerido--;
  		   if (tiempoHerido<=0) herido = false;
  		 }
-        // disparo
-        
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && tiempoUltimoDisparo >= COOLDOWN) {         
-            Kizazo bala = new Kizazo(
-                (float) spr.getX() + spr.getWidth() / 2 - 5,
-                (float) spr.getY() + spr.getHeight() - 5,
-                0, 3, txBala
-            );
-            juego.agregarBala(bala);
-            soundBala.play();
-            
-            tiempoUltimoDisparo = 0; // Reiniciamos cooldown
-        }
+       
         
         
     }

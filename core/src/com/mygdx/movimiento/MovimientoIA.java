@@ -12,7 +12,7 @@ public class MovimientoIA implements MovimientoStrategy {
     
     private boolean esperando = false;     
     private float tiempoEsperando = 0f;     
-    private float tiempoEsperaMax = 5.0f;   
+    private float tiempoEsperaMax = 7.0f;   
     
     public MovimientoIA(float limiteAncho) {
         puntosX = new float[] {
