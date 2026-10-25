@@ -56,7 +56,7 @@ public class Tablos extends Personaje{
 	        // mover
             move.mover(spr, hitbox, 900, 800);
         
-            transformarse();
+            TRANSFORMARSE();
             
             // atacar
             tiempoUltimoDisparo += Gdx.graphics.getDeltaTime();

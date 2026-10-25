@@ -18,7 +18,7 @@ public abstract class Personaje {
 
 	//metodos
 
-	public final void transformarse(){ //TemplateMethod
+	public final void TRANSFORMARSE(){ //TemplateMethod
 		
 		if(puedeTransformarse() && fase < maxFase) {
 			fase++;

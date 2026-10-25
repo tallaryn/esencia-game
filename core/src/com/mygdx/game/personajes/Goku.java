@@ -107,7 +107,7 @@ public class Goku extends Personaje{
     	{
     		auraKi.setPosition(spr.getX()-5 , spr.getY());
     		auraKi.draw(batch);
-	    	transformarse();
+    		TRANSFORMARSE();
 	    	
 	    	kiAcumulado ++;
 	    	return true;
@@ -129,6 +129,9 @@ public class Goku extends Personaje{
     	spr = new Sprite(new Texture (Gdx.files.internal("goku-ssj.png")));
     	spr.setSize(90, 150);
     	spr.setPosition(posX, posY);
+    	
+    	Sound soundSSJ = Gdx.audio.newSound(Gdx.files.internal("ssjTransformacion.ogg"));
+    	soundSSJ.play();
 		sumaPoder(80);
     }
     
