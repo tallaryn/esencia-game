@@ -40,7 +40,7 @@ git clone https://github.com/tallaryn/esencia-game/
 2. Bajo la sección `Libraries`, en `Modulepath` haz doble click a `JRE System Library` y dentro de `Execution Environment` seleccione `JavaSE-11`. Selecciona `Finish`, luego `Apply and Close`.
 3. Realiza el mismo procedimiento para `esencia game-desktop`.
 
-## Tercer paso: Ejecución
+## 3 - Ejecución
 
 Haz click en la flecha apuntando hacia abajo a la derecha del botón verde de Play (Run Project) en la barra de herramientas superior, luego seleccione `Run Configurations` y seleccione la configuración como `Java Application`.
     
