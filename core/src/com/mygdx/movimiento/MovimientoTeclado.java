@@ -9,7 +9,9 @@ public class MovimientoTeclado implements MovimientoStrategy{
 
 	private float velocidad = 300f;
 	
-	public MovimientoTeclado(){};
+	public MovimientoTeclado() {
+		
+	}
 
 
 	@Override
@@ -42,16 +44,6 @@ public class MovimientoTeclado implements MovimientoStrategy{
         hitbox.setPosition(centroX - (hitbox.width / 2f), centroY - (hitbox.height / 2f));
 
 		
-	}
-	
-	public void ralentizar()
-	{
-		velocidad = 150f;
-	}
-	
-	public void velocidadNormal()
-	{
-		velocidad = 300f;
 	}
 
 }

@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.EsenciaGame;
 import com.mygdx.game.HiScoreSingleton;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class PantallaGameOver implements Screen {
 
@@ -16,6 +18,7 @@ public class PantallaGameOver implements Screen {
 	
 	private int puntajeObtenido;
 	private boolean esNuevoRecord;
+	private TextureRegion bg;
 
 	public PantallaGameOver(EsenciaGame game, int puntajeFinal) {
 		this.game = game;
@@ -27,6 +30,8 @@ public class PantallaGameOver implements Screen {
         
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1200, 800);
+		
+		bg = new TextureRegion(new Texture(Gdx.files.internal("bg_namekusei.png")), 0, 0, 900, 800);
 	}
 
 	@Override
@@ -37,6 +42,7 @@ public class PantallaGameOver implements Screen {
 		game.getBatch().setProjectionMatrix(camera.combined);
 
 		game.getBatch().begin();
+		game.getBatch().draw(bg,0,0,1200,800);
 		game.getFont().draw(game.getBatch(), "Game Over !!! ", 120, 400,400,1,true);
 		game.getFont().draw(game.getBatch(), "Score: " + puntajeObtenido, 100, 350);
 		int max = HiScoreSingleton.getInstance().getHiScore();

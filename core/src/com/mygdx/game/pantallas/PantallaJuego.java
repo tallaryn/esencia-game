@@ -10,7 +10,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.EsenciaGame;
 import com.mygdx.game.LogicaJuego;
 import com.mygdx.game.HiScoreSingleton;
-
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class PantallaJuego implements Screen {
 
@@ -20,6 +21,7 @@ public class PantallaJuego implements Screen {
 	private Sound explosionSound;
 	private Music gameMusic;
 	private LogicaJuego juego;
+	private TextureRegion bg;
 
 	public PantallaJuego(EsenciaGame game, int score) 
 	{
@@ -31,10 +33,12 @@ public class PantallaJuego implements Screen {
 		camera.setToOrtho(false, 1200, 800);
 		
 		
-		//inicializar assets; musica de fondo y efectos de sonido
+		//inicializar assets; imgen de fondo, musica de fondo y efectos de sonido
+		
 		explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.ogg"));
 		explosionSound.setVolume(1,0.02f);
 		
+		bg = new TextureRegion(new Texture(Gdx.files.internal("bg_field.png")), 0, 0, 900, 800);
 		
 		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("Bring-Me-To-Life.ogg"));
 		gameMusic.setLooping(true);
@@ -74,6 +78,7 @@ public class PantallaJuego implements Screen {
           juego.actualizar();
 
           batch.begin();
+          batch.draw(bg,0,0,1200,800);
           juego.dibujar(batch);
           dibujaEncabezado();
           batch.end();

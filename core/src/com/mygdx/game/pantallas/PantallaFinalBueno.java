@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.EsenciaGame;
 import com.mygdx.game.HiScoreSingleton;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class PantallaFinalBueno implements Screen{
 
@@ -15,6 +17,7 @@ public class PantallaFinalBueno implements Screen{
 	
 	private int puntajeObtenido;
 	private boolean esNuevoRecord;
+	private TextureRegion bg;
 
 	public PantallaFinalBueno(EsenciaGame game, int puntajeFinal) {
 		this.game = game;
@@ -26,6 +29,8 @@ public class PantallaFinalBueno implements Screen{
         
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1200, 800);
+		
+		bg = new TextureRegion(new Texture(Gdx.files.internal("bg_esencia.png")), 0, 0, 900, 800);
 	}
 
 	
@@ -44,15 +49,16 @@ public class PantallaFinalBueno implements Screen{
 		game.getBatch().setProjectionMatrix(camera.combined);
 
 		game.getBatch().begin();
-		game.getFont().draw(game.getBatch(), "Ganaste", 120, 400,400,1,true);
-		game.getFont().draw(game.getBatch(), "Score: " + puntajeObtenido, 100, 350);
+		game.getBatch().draw(bg,0,0,1200,800);
+		game.getFont().draw(game.getBatch(), "Ganaste", 120, 600,400,1,true);
+		game.getFont().draw(game.getBatch(), "Score: " + puntajeObtenido, 100, 550);
 		int max = HiScoreSingleton.getInstance().getHiScore();
 		game.getFont().draw(game.getBatch(), "High Score: " + max, 100, 300);
 		
 		if (esNuevoRecord) {
-			game.getFont().draw(game.getBatch(), "NUEVO RECORD !!! ", 100, 250);
+			game.getFont().draw(game.getBatch(), "NUEVO RECORD !!! ", 100, 450);
 		}
-		game.getFont().draw(game.getBatch(), "Presiona cualquier tecla para reiniciar ...", 100, 200);
+		game.getFont().draw(game.getBatch(), "Presiona cualquier tecla para reiniciar ...", 100, 400);
 	
 		game.getBatch().end();
 

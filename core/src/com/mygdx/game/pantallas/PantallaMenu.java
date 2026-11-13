@@ -6,18 +6,23 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.EsenciaGame;
 import com.mygdx.game.HiScoreSingleton;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
 public class PantallaMenu implements Screen {
 
 	private EsenciaGame game;
 	private OrthographicCamera camera;
+	private TextureRegion bg;
 
 	public PantallaMenu(EsenciaGame game) {
 		this.game = game;
         
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1200, 800);
+		
+		bg = new TextureRegion(new Texture(Gdx.files.internal("bg_menu.png")), 0, 0, 900, 800);
 	}
 
 	@Override
@@ -28,12 +33,12 @@ public class PantallaMenu implements Screen {
 		game.getBatch().setProjectionMatrix(camera.combined);
 
 		game.getBatch().begin();
-		game.getFont().draw(game.getBatch(), "esencia game", 500, 500);
+		game.getBatch().draw(bg,0,0,1200,800);
 
 		int recordPuntaje = HiScoreSingleton.getInstance().getHiScore();
-		game.getFont().draw(game.getBatch(), "Record: " + recordPuntaje, 350, 400);
+		game.getFont().draw(game.getBatch(), "Record: " + recordPuntaje, 150, 350);
 		
-		game.getFont().draw(game.getBatch(), "Presiona cualquier tecla para empezar ...", 350, 300);
+		game.getFont().draw(game.getBatch(), "Presiona cualquier tecla para empezar ...", 150, 250);
 	
 		game.getBatch().end();
 
