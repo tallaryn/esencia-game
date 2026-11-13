@@ -9,7 +9,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.LogicaJuego;
 import com.mygdx.game.ataques.*;
-import com.mygdx.movimiento.MovimientoIA;
+import com.mygdx.movimiento.MovimientoIABidimensional;
+import com.mygdx.movimiento.MovimientoIAHorizontal;
 import com.mygdx.movimiento.MovimientoStrategy;
 
 public class Tablos extends Personaje{
@@ -21,7 +22,7 @@ public class Tablos extends Personaje{
     private boolean herido = false; 
     private Rectangle hitbox;
     
-    private MovimientoStrategy move = new MovimientoIA(900);
+    private MovimientoStrategy move = new MovimientoIAHorizontal(900);
     private Patron ataque; 
     private int tipoAtaque = 0;
     private float tiempoCambioFaseAtaque = 0f;
@@ -128,6 +129,7 @@ public class Tablos extends Personaje{
     @Override
     protected void aplicarTransformacion() {
         if (fase == 2) {
+        	move = new MovimientoIABidimensional(900, 800);
             poder *= 2;
         }
     }

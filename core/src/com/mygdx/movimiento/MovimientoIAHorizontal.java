@@ -4,17 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 
-public class MovimientoIA implements MovimientoStrategy {
+public class MovimientoIAHorizontal implements MovimientoStrategy {
 
     private float velocidad = 300f;
-    private float[] puntosX;       
+    private float[] puntosX;
     private int indiceActual = 0;  
     
     private boolean esperando = false;     
     private float tiempoEsperando = 0f;     
     private float tiempoEsperaMax = 7.0f;   
     
-    public MovimientoIA(float limiteAncho) {
+    public MovimientoIAHorizontal(float limiteAncho) {
         puntosX = new float[] {
             limiteAncho / 8,
             limiteAncho / 3,
@@ -22,13 +22,14 @@ public class MovimientoIA implements MovimientoStrategy {
             limiteAncho / 3
         };
     }
-
+    
+    
     @Override
     public void mover(Sprite spr, Rectangle hitbox, float limiteAncho, float limiteAlto) {
         float delta = Gdx.graphics.getDeltaTime();
         float x = spr.getX();
         float objetivoX = puntosX[indiceActual];
-        float objetivoY = limiteAlto - 200; 
+        float objetivoY = limiteAlto - 200;
 
         
         if (esperando) {
@@ -42,19 +43,20 @@ public class MovimientoIA implements MovimientoStrategy {
         } 
         else {
             
-            float paso = velocidad * delta;
+            float pasoX = velocidad * delta;
 
-            if (Math.abs(x - objetivoX) < paso) {
+            if (Math.abs(x - objetivoX) < pasoX) {
                
                 x = objetivoX;
                 esperando = true; 
             } 
             else if (x < objetivoX) {
-                x += paso;
+                x += pasoX;
             } 
             else {
-                x -= paso;
+                x -= pasoX;
             }
+            
         }
 
         
