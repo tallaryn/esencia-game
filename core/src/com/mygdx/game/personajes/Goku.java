@@ -35,7 +35,7 @@ public class Goku extends Personaje{
     private int maxKi = 500;
     private Patron ataque;
     
-    private MovimientoStrategy move = new MovimientoTeclado();
+    private MovimientoTeclado move = new MovimientoTeclado();
     
     
     
@@ -71,11 +71,21 @@ public class Goku extends Personaje{
         	if(!aumentarKi(batch)) {
         		
         		// que se mueva con teclado
-        		move.mover(spr, hitbox, 900, 800);
+        		if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT))
+                {
+        			move.ralentizar();
+                	move.mover(spr, hitbox, 900, 800);
+                }
+        		else {
+        			move.velocidadNormal();
+        			move.mover(spr, hitbox, 900, 800);
+        			
+        		}
+        		
         		
         		 // disparo
                 
-                if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && tiempoUltimoDisparo >= COOLDOWN) {         
+                if ((Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed(Input.Keys.Z)) && tiempoUltimoDisparo >= COOLDOWN) {         
                     
                 	juego.agregarBala(ataque.ejecutarAtaque(spr.getX() + spr.getWidth() / 2 - 5,
                 						  spr.getY() + spr.getHeight() - 5
@@ -85,6 +95,7 @@ public class Goku extends Personaje{
                     
                     tiempoUltimoDisparo = 0; // Reiniciamos cooldown
                 }
+                
         	}
 
  		    spr.draw(batch);

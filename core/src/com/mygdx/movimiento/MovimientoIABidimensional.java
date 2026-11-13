@@ -74,11 +74,11 @@ public class MovimientoIABidimensional implements MovimientoStrategy {
             }
             else if(y < objetivoY)
             {
-            	y += paso;
+            	y += paso*0.5;
             }
             else
             {
-            	y -= paso;
+            	y -= paso * 0.5;
             }
         }
 

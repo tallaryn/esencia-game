@@ -21,7 +21,6 @@ public class PantallaMenu implements Screen {
         
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1200, 800);
-		
 		bg = new TextureRegion(new Texture(Gdx.files.internal("bg_menu.png")), 0, 0, 900, 800);
 	}
 

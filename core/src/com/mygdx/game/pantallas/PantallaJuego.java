@@ -13,6 +13,8 @@ import com.mygdx.game.HiScoreSingleton;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+
+
 public class PantallaJuego implements Screen {
 
 	private EsenciaGame game;
@@ -34,16 +36,15 @@ public class PantallaJuego implements Screen {
 		
 		
 		//inicializar assets; imgen de fondo, musica de fondo y efectos de sonido
-		
 		explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.ogg"));
 		explosionSound.setVolume(1,0.02f);
 		
-		bg = new TextureRegion(new Texture(Gdx.files.internal("bg_field.png")), 0, 0, 900, 800);
 		
 		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("Bring-Me-To-Life.ogg"));
 		gameMusic.setLooping(true);
 		gameMusic.setVolume(0.5f);
 		gameMusic.play();
+		bg = new TextureRegion(new Texture(Gdx.files.internal("bg_field.png")), 0, 0, 900, 800);
 	}
 		
     
@@ -68,6 +69,7 @@ public class PantallaJuego implements Screen {
 	    game.getFont().draw(batch, "Poder: " + juego.getGoku().getPoder(), xDerecha, yInicial - (espaciado * 4));
 	    game.getFont().draw(batch, "Ki acumulado: " + juego.getGoku().getKi(), xDerecha, yInicial - (espaciado * 5));
 	    game.getFont().draw(batch, "	X para acumular: ", xDerecha, yInicial - (espaciado * 6));
+	    game.getFont().draw(batch, "	SHIFT para ralentizar: ", xDerecha, yInicial - (espaciado * 7));
 		
 	}
 	
